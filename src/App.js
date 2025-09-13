@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+
 import './App.css';
+import kaizenLogo from './imgs/ChatGPT Image 1 sept 2025, 13_02_16.png'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+
+      <div className='kaizentob-logo-container'>
+        <img
+          className='kaizentob-logo' 
+          src={kaizenLogo}
+          alt='logo'
+        />
+      </div>
+
+      <div className='calculator-container'>
+
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
