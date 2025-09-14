@@ -1,6 +1,8 @@
 
 import './App.css';
 import Button from './components/Button';
+import ClearButton from './components/ClearButton';
+import Screen from './components/Screen';
 import kaizenLogo from './imgs/ChatGPT Image 1 sept 2025, 13_02_16.png'
 
 function App() {
@@ -16,6 +18,12 @@ function App() {
       </div>
 
       <div className='calculator-container'>
+
+        <Screen 
+
+        />
+
+
         <div className='row-calculator'> 
           <Button>1</Button>
           <Button>2</Button>
@@ -40,7 +48,11 @@ function App() {
           <Button>.</Button>
           <Button>/</Button>          
         </div>
-        <div className='row-calculator'></div>
+        <div className='row-calculator'>
+          <ClearButton>
+            Clear
+          </ClearButton>
+        </div>
       </div>
     </div>
   )
