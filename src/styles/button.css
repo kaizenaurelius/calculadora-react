@@ -12,9 +12,23 @@
     border: 2px solid white;
     margin: 4px;
     cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.button-container:hover {
+    background-color: #5a01a7;
+    box-shadow: 0 4px 20px rgba(90,1,167,0.3);
+    transform: scale(1.05);
+    border-color: #ffde59;
 }
 
 .operator {
     background-color: #00471b;
-    
+}
+
+.operator:hover {
+    background-color: #ffde59;
+    border-color: #00471b;
+    box-shadow: 0 4px 20px rgba(0,71,27,0.3);
+    transform: scale(1.05);
 }
