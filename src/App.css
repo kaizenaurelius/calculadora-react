@@ -19,16 +19,16 @@
 }
 
 .kaizentob-logo {
-    height: 200px;
+    width: 200px;
 }
 
 .calculator-container {
     width: 400px;
-    height: 500px;
+    height: 80vh;
     padding: 14px;
     border-radius: 20px;
     background-color: white;
-    color: 2px solid #009999;
+    border: 2px solid #009999;
 }
 
 .row-calculator {

@@ -1,9 +1,14 @@
-function ClearButton (props) {
+import '../styles/clearbutton.css'
 
-	<div className='clear-button'>
-		{props.children}
-	</div>
-	
+
+function ClearButton (props) {
+	return (
+		<div className='clear-button'>
+			{props.children}
+		</div>
+
+	)
+
 }
 
 export default ClearButton
