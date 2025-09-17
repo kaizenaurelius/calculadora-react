@@ -5,6 +5,7 @@ import ClearButton from './components/ClearButton';
 import Screen from './components/Screen';
 import kaizenLogo from './imgs/ChatGPT Image 1 sept 2025, 13_02_16.png'
 import { useState } from 'react';
+import { evaluate } from 'mathjs'
 
 function App() {
 
@@ -12,6 +13,10 @@ function App() {
 
   const insertInputToScreen = value => {
     setInputValue(inputValue + value) 
+  }
+
+  const showResult = () => {
+    setInputValue(evaluate(inputValue))
   }
 
 
@@ -76,10 +81,18 @@ function App() {
           >*</Button>
         </div>
         <div className='row-calculator'>
-          <Button>=</Button>
-          <Button>0</Button>
-          <Button>.</Button>
-          <Button>/</Button>          
+          <Button
+            handleClick={showResult}
+          >=</Button>
+          <Button
+            handleClick={insertInputToScreen}
+          >0</Button>
+          <Button 
+            handleClick={insertInputToScreen}
+          >.</Button>
+          <Button
+            handleClick={insertInputToScreen}
+          >/</Button>          
         </div>
         <div className='row-calculator'>
           <ClearButton
