@@ -3,7 +3,10 @@ import '../styles/clearbutton.css'
 
 function ClearButton (props) {
 	return (
-		<div className='clear-button'>
+		<div 
+			className='clear-button'
+			
+			>
 			{props.children}
 		</div>
 
