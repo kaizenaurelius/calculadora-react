@@ -21,16 +21,35 @@ function App() {
     ]);
   }
 
-  const insertInputToScreen = value => {
+  const [error, setError] = useState('');
 
-      setInputValue(inputValue + value) 
+  const insertInputToScreen = value => {
+    setError('');
+    // Evitar dos puntos decimales seguidos en el mismo número
+    if (value === '.') {
+      const partes = inputValue.split(/[+\-*/]/);
+      const ultimoNumero = partes[partes.length - 1];
+      if (ultimoNumero.includes('.')) {
+        return;
+      }
+    }
+    setInputValue(inputValue + value);
   }
 
   const showResult = () => {
     if (!inputValue) return;
-    const result = evaluate(inputValue).toString();
-    saveToHistory(inputValue, result);
-    setInputValue(result);
+    try {
+      const result = evaluate(inputValue);
+      if (!isFinite(result)) {
+        setError('Error: División por cero');
+        return;
+      }
+      saveToHistory(inputValue, result);
+      setInputValue(result.toString());
+      setError('');
+    } catch (e) {
+      setError('Error: Operación inválida');
+    }
   }
 
   useEffect(() => {
@@ -39,14 +58,32 @@ function App() {
       // Números y operadores permitidos
       const validKeys = ['0','1','2','3','4','5','6','7','8','9','+','-','*','/','.'];
       if (validKeys.includes(key)) {
+        setError('');
+        if (key === '.') {
+          const pieces = inputValue.split(/[+\-*/]/);
+          const lastNumber = pieces[pieces.length - 1];
+          if (lastNumber.includes('.')) {
+            return;
+          }
+        }
         setInputValue((prev) => prev + key);
       } else if (key === 'Enter' || key === '=') {
         if (inputValue) {
-          const result = evaluate(inputValue).toString();
-          saveToHistory(inputValue, result);
-          setInputValue(result);
+          try {
+            const result = evaluate(inputValue);
+            if (!isFinite(result)) {
+              setError('Error: División por cero');
+              return;
+            }
+            saveToHistory(inputValue, result);
+            setInputValue(result.toString());
+            setError('');
+          } catch (e) {
+            setError('Error: Operación inválida');
+          }
         }
       } else if (key === 'Backspace') {
+        setError('');
         setInputValue((prev) => prev.slice(0, -1));
       }
     };
@@ -79,7 +116,7 @@ function App() {
         </div>
 
         <Screen 
-          input={inputValue}
+          input={error ? error : inputValue}
         />
 
 
