@@ -27,9 +27,9 @@ function App() {
     setError('');
     // Evitar dos puntos decimales seguidos en el mismo número
     if (value === '.') {
-      const partes = inputValue.split(/[+\-*/]/);
-      const ultimoNumero = partes[partes.length - 1];
-      if (ultimoNumero.includes('.')) {
+      const pieces = inputValue.split(/[+\-*/]/);
+      const lastNumber = pieces[pieces.length - 1];
+      if (lastNumber.includes('.')) {
         return;
       }
     }
