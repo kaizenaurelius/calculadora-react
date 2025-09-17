@@ -15,6 +15,12 @@
     transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s, border-color 0.2s;
 }
 
+.button-container.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .button-container:hover {
     background-color: #5a01a7;
     box-shadow: 0 4px 20px rgba(90,1,167,0.3);

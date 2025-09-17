@@ -7,12 +7,16 @@ function Button(props) {
   }
 
 
+  const isDisabled = props.disabled;
   return (
-      <div
-        className={`button-container ${isOperator(props.children) ? 'operator' : ''}`.trimEnd()}
-        onClick={() => props.handleClick(props.children)}>
-        {props.children}
-      </div>
+    <div
+      className={`button-container ${isOperator(props.children) ? 'operator' : ''}${isDisabled ? ' disabled' : ''}`.trimEnd()}
+      onClick={isDisabled ? undefined : () => props.handleClick(props.children)}
+      aria-disabled={isDisabled}
+      tabIndex={isDisabled ? -1 : 0}
+    >
+      {props.children}
+    </div>
   )
 }
 

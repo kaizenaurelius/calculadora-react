@@ -12,13 +12,15 @@ function App() {
   const [inputValue, setInputValue] = useState('')
 
   const insertInputToScreen = value => {
-    setInputValue(inputValue + value) 
+
+      setInputValue(inputValue + value) 
   }
 
-  const showResult = () => {
-    setInputValue(evaluate(inputValue))
+    const showResult = () => {
+      setInputValue(evaluate(inputValue)) 
   }
 
+ 
 
   return (
     <div className='App'>
@@ -83,6 +85,7 @@ function App() {
         <div className='row-calculator'>
           <Button
             handleClick={showResult}
+            disabled={!inputValue}
           >=</Button>
           <Button
             handleClick={insertInputToScreen}
