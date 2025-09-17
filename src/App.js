@@ -14,6 +14,7 @@ function App() {
     setInputValue(inputValue + value) 
   }
 
+
   return (
     <div className='App'>
 
@@ -81,7 +82,8 @@ function App() {
           <Button>/</Button>          
         </div>
         <div className='row-calculator'>
-          <ClearButton>
+          <ClearButton
+            handleClear={() => setInputValue('')}>
             Clear
           </ClearButton>
         </div>
