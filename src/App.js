@@ -11,13 +11,26 @@ function App() {
 
   const [inputValue, setInputValue] = useState('')
 
+  const [operationHistory, setOperationHistory] = useState([])
+
+  // Guarda una operación en el historial
+  const saveToHistory = (operation, result) => {
+    setOperationHistory(prev => [
+      ...prev,
+      `${operation} = ${result}`
+    ]);
+  }
+
   const insertInputToScreen = value => {
 
       setInputValue(inputValue + value) 
   }
 
-    const showResult = () => {
-      setInputValue(evaluate(inputValue)) 
+  const showResult = () => {
+    if (!inputValue) return;
+    const result = evaluate(inputValue).toString();
+    saveToHistory(inputValue, result);
+    setInputValue(result);
   }
 
   useEffect(() => {
@@ -28,7 +41,11 @@ function App() {
       if (validKeys.includes(key)) {
         setInputValue((prev) => prev + key);
       } else if (key === 'Enter' || key === '=') {
-        if (inputValue) setInputValue(evaluate(inputValue).toString());
+        if (inputValue) {
+          const result = evaluate(inputValue).toString();
+          saveToHistory(inputValue, result);
+          setInputValue(result);
+        }
       } else if (key === 'Backspace') {
         setInputValue((prev) => prev.slice(0, -1));
       }
@@ -37,7 +54,7 @@ function App() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [inputValue]);
 
- 
+
 
   return (
     <div className='App'>
@@ -50,7 +67,16 @@ function App() {
         />
       </div>
 
-      <div className='calculator-container'>
+  <div className='calculator-container'>
+        {/* Historial de operaciones */}
+        <div className='operation-history'>
+          <h4>Historial</h4>
+          <ul>
+            {operationHistory.slice(-5).reverse().map((op, idx) => (
+              <li key={idx}>{op}</li>
+            ))}
+          </ul>
+        </div>
 
         <Screen 
           input={inputValue}
@@ -103,6 +129,7 @@ function App() {
           <Button
             handleClick={showResult}
             disabled={!inputValue}
+            history={saveToHistory}
           >=</Button>
           <Button
             handleClick={insertInputToScreen}
