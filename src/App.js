@@ -4,7 +4,7 @@ import Button from './components/Button';
 import ClearButton from './components/ClearButton';
 import Screen from './components/Screen';
 import kaizenLogo from './imgs/ChatGPT Image 1 sept 2025, 13_02_16.png'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { evaluate } from 'mathjs'
 
 function App() {
@@ -19,6 +19,23 @@ function App() {
     const showResult = () => {
       setInputValue(evaluate(inputValue)) 
   }
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const { key } = event;
+      // Números y operadores permitidos
+      const validKeys = ['0','1','2','3','4','5','6','7','8','9','+','-','*','/','.'];
+      if (validKeys.includes(key)) {
+        setInputValue((prev) => prev + key);
+      } else if (key === 'Enter' || key === '=') {
+        if (inputValue) setInputValue(evaluate(inputValue).toString());
+      } else if (key === 'Backspace') {
+        setInputValue((prev) => prev.slice(0, -1));
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [inputValue]);
 
  
 
